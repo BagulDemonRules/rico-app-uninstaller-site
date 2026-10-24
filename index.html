@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Official product page for Rico App Uninstaller, a privacy-focused macOS uninstall utility.">
+  <title>Rico App Uninstaller</title>
+  <style>
+    :root { color-scheme: dark; --bg:#121417; --panel:#1c2025; --text:#f6f7f9; --muted:#aeb5bf; --accent:#ff7a1a; --line:#323842; --green:#52d273; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(145deg,#191b20 0%,var(--bg) 55%); color:var(--text); font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { width:min(980px,calc(100% - 40px)); margin:auto; padding:72px 0 80px; }
+    header { padding:48px; border:1px solid var(--line); border-radius:24px; background:rgba(28,32,37,.92); box-shadow:0 24px 70px rgba(0,0,0,.28); }
+    .mark { display:inline-grid; place-items:center; width:58px; height:58px; border-radius:16px; background:var(--accent); color:#151515; font-size:31px; font-weight:800; }
+    .status { display:inline-block; margin-left:12px; padding:6px 11px; border:1px solid #3f684a; border-radius:999px; color:var(--green); font-size:14px; vertical-align:9px; }
+    h1 { margin:24px 0 6px; font-size:clamp(38px,7vw,68px); line-height:1.04; letter-spacing:-.045em; }
+    .lead { max-width:740px; margin:20px 0 0; color:var(--muted); font-size:21px; }
+    section { margin-top:26px; padding:30px 34px; border:1px solid var(--line); border-radius:20px; background:var(--panel); }
+    h2 { margin:0 0 12px; font-size:25px; letter-spacing:-.02em; }
+    p { margin:10px 0; }
+    ul,ol { margin:12px 0 0; padding-left:24px; }
+    li + li { margin-top:8px; }
+    strong { color:#fff; }
+    code { color:#ffd0ad; overflow-wrap:anywhere; }
+    a { color:#ff9a50; }
+    footer { margin-top:34px; color:var(--muted); text-align:center; font-size:14px; }
+    @media (max-width:600px) { main{width:min(100% - 24px,980px);padding-top:24px} header{padding:28px} section{padding:24px} }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <span class="mark">R</span><span class="status">In active development</span>
+    <h1>Rico App Uninstaller</h1>
+    <p class="lead">A native macOS utility that builds precise, local uninstall manifests from installation activity initiated by the user.</p>
+  </header>
+
+  <section>
+    <h2>What Rico does</h2>
+    <p>Rico helps users understand and remove the files created when they install an application. The user explicitly starts a recording session, installs the software, then stops the session. Rico creates a local manifest that can later be reviewed and used to move eligible associated items to the Trash.</p>
+    <ol>
+      <li>The user starts an installation recording.</li>
+      <li>The application and any official installer run normally.</li>
+      <li>Rico attributes relevant filesystem activity to that installation.</li>
+      <li>On uninstall, Rico reports what was removed and what macOS kept or protected.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Why Endpoint Security is requested</h2>
+    <p>Filesystem snapshots and FSEvents can report that a path changed, but they do not reliably identify which process caused the change. Unrelated macOS background activity can therefore be mistaken for part of an installation.</p>
+    <p>Rico intends to use Apple's Endpoint Security framework in <strong>notification-only mode</strong> to associate filesystem operations with the responsible process and its descendants. This attribution is needed to reduce false positives and prevent unrelated user or system data from entering an uninstall plan.</p>
+    <ul>
+      <li>No authorization, denial, blocking, suspension, or modification of system events.</li>
+      <li>Only process-lifecycle and filesystem notification events needed for installation provenance.</li>
+      <li>Monitoring is active only during a recording session explicitly started by the user.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Privacy</h2>
+    <ul>
+      <li>Rico does not read or collect file contents.</li>
+      <li>Rico does not collect keystrokes, credentials, network traffic, or personal communications.</li>
+      <li>Event metadata and uninstall manifests remain locally on the user's Mac.</li>
+      <li>No Endpoint Security data is uploaded, sold, or shared.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Application information</h2>
+    <p><strong>Host bundle identifier:</strong> <code>com.rico.appuninstaller.shot</code></p>
+    <p><strong>Proposed system extension identifier:</strong> <code>com.rico.appuninstaller.shot.endpointsecurity</code></p>
+    <p><strong>Planned distribution:</strong> Direct Developer ID distribution outside the Mac App Store, with Apple notarization and stapling.</p>
+  </section>
+
+  <footer>Rico App Uninstaller is an independent macOS project and is not affiliated with Apple Inc.</footer>
+</main>
+</body>
+</html>
